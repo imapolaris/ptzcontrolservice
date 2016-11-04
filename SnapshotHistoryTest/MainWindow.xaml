@@ -1,0 +1,102 @@
+﻿<Window x:Class="SnapshotHistoryTest.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SnapshotHistoryTest"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Width" Value="50"/>
+            <Setter Property="Margin" Value="1,0"/>
+        </Style>
+        <!--<Style TargetType="DataGrid">
+            <Style.Triggers>
+                <da
+            </Style.Triggers>
+
+        </Style>-->
+    </Window.Resources>
+    <DockPanel>
+        <DockPanel DockPanel.Dock="Top" Margin="2,5">
+            <TextBlock Text="文件路径：" DockPanel.Dock="Left"/>
+            <Button Content="清空" Command="{Binding ClearCmd}" DockPanel.Dock="Right"/>
+            <Button Content="打开" Command="{Binding ReadFileCmd}" DockPanel.Dock="Right"/>
+            <Button Content="选择" Command="{Binding OpenFileDialogCmd}" DockPanel.Dock="Right" />
+            <TextBox Text="{Binding FileName}" VerticalContentAlignment="Center" Margin="2,0"/>
+        </DockPanel>
+        <StackPanel Height="25" DockPanel.Dock="Bottom" Orientation="Horizontal" Margin="2">
+            <Button Content="全部显示" 
+                    Command="{Binding DisplayAllCmd}" 
+                    DockPanel.Dock="Right"
+                    Width="60"
+                    Margin="5,0"/>
+            <TextBlock Text="关键字：" VerticalAlignment="Center"/>
+            <TextBox Text="{Binding SearchKey, UpdateSourceTrigger=PropertyChanged}" 
+                     VerticalAlignment="Stretch" 
+                     VerticalContentAlignment="Center"
+                     MouseDoubleClick="TextBox_MouseDoubleClick"
+                     Width="150"/>
+            <Button Content="查找" Command="{Binding SearchCmd}" IsDefault="True"/>
+            
+            <Label Content="开始时间："/>
+            <TextBox Text="{Binding StartTime, Mode=TwoWay, StringFormat=yyyy-MM-dd HH:mm:ss, NotifyOnSourceUpdated=True}"/>
+            <Label Content="结束时间："/>
+            <TextBox Text="{Binding EndTime, Mode=TwoWay, StringFormat=yyyy-MM-dd HH:mm:ss, NotifyOnSourceUpdated=True}"/>
+            <CheckBox Content="启用时间过滤"
+                      IsChecked="{Binding IsFilterFromTime, NotifyOnSourceUpdated=True}"
+                      VerticalAlignment="Center"/>
+        </StackPanel>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="3"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="3"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <DataGrid ItemsSource="{Binding HistorySource.View}"
+                      SelectedItem="{Binding SelectedHistory, Mode=TwoWay}"
+                      IsReadOnly="True">
+                <DataGrid.RowStyle >
+                    <Style TargetType="DataGridRow">
+                        <Setter Property="Background" Value="White"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="LightGray"/>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="LightGray"/>
+                                <Setter Property="Foreground" Value="Red"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.RowStyle>
+            </DataGrid>
+
+            <DataGrid ItemsSource="{Binding MuxSource.View}"
+                      SelectedItem="{Binding SelectedMux, Mode=TwoWay}"
+                      IsReadOnly="True"
+                      Grid.Row="2"/>
+            <GridSplitter VerticalAlignment="Stretch"
+                          HorizontalAlignment="Stretch"
+                          Grid.Row="1"/>
+            <GridSplitter VerticalAlignment="Stretch"
+                          HorizontalAlignment="Stretch"
+                          Grid.Column="1"
+                          Grid.RowSpan="3"/>
+            <DataGrid ItemsSource="{Binding SnapshotsSource.View}"
+                      SelectedItem="{Binding SelectedSnapshot, Mode=TwoWay}"
+                      IsReadOnly="True"
+                      Grid.Column="2"
+                      Grid.RowSpan="3"
+                      Grid.ColumnSpan="2"/>
+
+        </Grid>
+
+    </DockPanel>
+</Window>

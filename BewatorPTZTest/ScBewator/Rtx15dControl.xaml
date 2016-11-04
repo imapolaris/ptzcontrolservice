@@ -1,0 +1,139 @@
+﻿<UserControl x:Class="BewatorPTZTest.ScBewator.Rtx15dControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BewatorPTZTest.ScBewator"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="500">
+    <UserControl.Resources>
+        <ResourceDictionary Source="../Dictionary/DictStyle.xaml"/>
+    </UserControl.Resources>
+    <StackPanel Orientation="Vertical"
+                Background="#1040Fa">
+        <StackPanel Orientation="Vertical">
+            <StackPanel>
+                <Label Content="反馈开关:" Width="60"/>
+                <Button Content="开始" Command="{Binding PTZStartFeedBackCmd}"/>
+                <Button Content="停止" Command="{Binding PTZStopFeedBackCmd}"/>
+                <Button Content="显示反馈" Command="{Binding ReplayPTZFeedBackCmd}"/>
+            </StackPanel>
+            <StackPanel>
+                <Label Content="水平零点:" Width="60"/>
+                <TextBox Text="{Binding PtzConverter.NorthPan}" Width="60" IsReadOnly="True"/>
+                <Button Content="查询" Command="{Binding DemandNorthPanCmd}"/>
+                <TextBox Text="{Binding NextNorthPan}" Width="60"/>
+                <Button Content="设置" Command="{Binding SetNorthPanCmd}"/>
+            </StackPanel>
+            <StackPanel>
+                <Label Content="垂直零点:" Width="60"/>
+                <TextBox Text="{Binding PtzConverter.HorizontalTilt}" Width="60" IsReadOnly="True"/>
+                <Button Content="查询" Command="{Binding DemandHorizontalTiltCmd}"/>
+                <TextBox Text="{Binding NextHorizontalTilt}" Width="60"/>
+                <Button Content="设置" Command="{Binding SetHorizontalTiltCmd}"/>
+            </StackPanel>
+            <StackPanel>
+                <Label Content="水平校准:" Width="60"/>
+                <TextBox Text="{Binding DegreePan}" Width="60" IsReadOnly="True"/>
+                <Button Content="查询" Command="{Binding DemandDegreePanCmd}"/>
+                <TextBox Text="{Binding NextDegreePan}" Width="60"/>
+                <Button Content="设置" Command="{Binding SetDegreePanCmd}"/>
+            </StackPanel>
+            <StackPanel>
+                <Label Content="垂直校准:" Width="60"/>
+                <TextBox Text="{Binding DegreeTilt}" Width="60" IsReadOnly="True"/>
+                <Button Content="查询" Command="{Binding DemandDegreeTiltCmd}"/>
+                <TextBox Text="{Binding NextDegreeTilt}" Width="60"/>
+                <Button Content="设置" Command="{Binding SetDegreeTiltCmd}"/>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Orientation="Vertical">
+            <StackPanel>
+                <Label Content="Pan" Width="60"/>
+                <TextBox Text="{Binding PtzConverter.CurPan}" Width="60" IsReadOnly="True"/>
+                <Button Content="查询" Command="{Binding DemandPanCmd}"/>
+                <TextBox Text="{Binding NextPan}" Width="60"/>
+                <Button Content="转至" Command="{Binding GoToPanCmd}"/>
+            </StackPanel>
+            <StackPanel>
+                <Label Content="Tilt" Width="60"/>
+                <TextBox Text="{Binding PtzConverter.CurTilt}" Width="60" IsReadOnly="True"/>
+                <Button Content="查询" Command="{Binding DemandTiltCmd}"/>
+                <TextBox Text="{Binding NextTilt}" Width="60"/>
+                <Button Content="转至" Command="{Binding GoToTiltCmd}"/>
+            </StackPanel>
+            <StackPanel>
+                <Label Content="Zoom" Width="60"/>
+                <TextBox Text="{Binding PtzConverter.CurZoom}" Width="60" IsReadOnly="True"/>
+                <Button Content="查询" Command="{Binding DemandZoomCmd}"/>
+                <TextBox Text="{Binding NextZoom}" Width="60"/>
+                <Button Content="转至" Command="{Binding GoToZoomCmd}"/>
+            </StackPanel>
+            <StackPanel>
+                <Label Content="Focus" Width="60"/>
+                <TextBox Text="{Binding PtzConverter.CurFocus}" Width="60" IsReadOnly="True"/>
+                <Button Content="查询" Command="{Binding DemandFocusCmd}"/>
+                <TextBox Text="{Binding NextFocus}" Width="60"/>
+                <Button Content="转至" Command="{Binding GoToFocusCmd}"/>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel>
+            <Label Content="水平限位:" Width="60"/>
+            <Button Content="查询" Command="{Binding DemandPanLimitCmd}"/>
+            <Label Content="左限位:" Width="50"/>
+            <TextBox Text="{Binding PtzConverter.LeftLimit}" Width="60" IsReadOnly="True"/>
+            <Label Content="右限位:" Width="50"/>
+            <TextBox Text="{Binding PtzConverter.RightLimit}" Width="60" IsReadOnly="True"/>
+        </StackPanel>
+        <StackPanel>
+            <Label Content="垂直限位:" Width="60"/>
+            <Button Content="查询" Command="{Binding DemandTiltLimitCmd}"/>
+            <Label Content="下限位:" Width="50"/>
+            <TextBox Text="{Binding PtzConverter.DownLimit}" Width="60" IsReadOnly="True"/>
+            <Label Content="上限位:" Width="50"/>
+            <TextBox Text="{Binding PtzConverter.UpLimit}" Width="60" IsReadOnly="True"/>
+        </StackPanel>
+        <StackPanel>
+            <Label Content="变倍限位:" Width="60"/>
+            <Button Content="查询" Command="{Binding DemandZoomLimitCmd}"/>
+            <Label Content="最小值:" Width="50"/>
+            <TextBox Text="{Binding PtzConverter.MinZoom}" Width="60" IsReadOnly="True"/>
+            <Label Content="最大值:" Width="50"/>
+            <TextBox Text="{Binding PtzConverter.MaxZoom}" Width="60" IsReadOnly="True"/>
+        </StackPanel>
+        <StackPanel>
+            <Label Content="聚焦限位:" Width="60"/>
+            <Button Content="查询" Command="{Binding DemandFocusLimitCmd}"/>
+            <Label Content="最小值:" Width="50"/>
+            <TextBox Text="{Binding PtzConverter.MinFocus}" Width="60" IsReadOnly="True"/>
+            <Label Content="最大值:" Width="50"/>
+            <TextBox Text="{Binding PtzConverter.MaxFocus}" Width="60" IsReadOnly="True"/>
+        </StackPanel>
+        
+            <StackPanel Orientation="Vertical"  DataContext="{Binding PtzConverter}">
+                <Label Content="转换后的反馈值：" HorizontalAlignment="Left" Width="auto"/>
+                <StackPanel>
+                    <Label Content="Pan:" Width="60"/>
+                    <TextBox Text="{Binding PtzPosition.Pan, Mode=OneWay}" Width="60" IsReadOnly="True"/>
+                    <Label Content="左限位:" Width="50"/>
+                    <TextBox Text="{Binding PtzLimits.Left, Mode=OneWay}" Width="60" IsReadOnly="True"/>
+                    <Label Content="右限位:" Width="50"/>
+                    <TextBox Text="{Binding PtzLimits.Right, Mode=OneWay}" Width="60" IsReadOnly="True"/>
+                </StackPanel>
+                <StackPanel>
+                    <Label Content="Tilt:" Width="60"/>
+                    <TextBox Text="{Binding PtzPosition.Tilt, Mode=OneWay}" Width="60" IsReadOnly="True"/>
+                    <Label Content="上限位:" Width="50"/>
+                    <TextBox Text="{Binding PtzLimits.Up, Mode=OneWay}" Width="60" IsReadOnly="True"/>
+                    <Label Content="下限位:" Width="50"/>
+                    <TextBox Text="{Binding PtzLimits.Down, Mode=OneWay}" Width="60" IsReadOnly="True"/>
+                </StackPanel>
+                <StackPanel>
+                    <Label Content="Zoom:" Width="60"/>
+                    <TextBox Text="{Binding PtzPosition.Zoom, Mode=OneWay}" Width="60" IsReadOnly="True"/>
+                    <Label Content="最大值:" Width="50"/>
+                    <TextBox Text="{Binding PtzLimits.ZoomMax, Mode=OneWay}" Width="60" IsReadOnly="True"/>
+                </StackPanel>
+            </StackPanel>
+    </StackPanel>
+</UserControl>

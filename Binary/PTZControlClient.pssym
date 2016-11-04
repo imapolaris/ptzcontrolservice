@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Symbols LinesOfCode="796" PostSharpLinesOfCode="0" xmlns="http://schemas.postsharp.org/2.0/symbols">
+  <Class Class="#1=T:[AopUtil]AopUtil.WpfBinding.AutoNotifyAttribute">
+    <Instance Declaration="#2=P:[PTZControlClient]PTZControlClient.PTZControlConfig::Selected()" Id="6176eb7caa091360">
+      <Target>
+        <JoinPoint Advised="#3=M:[PTZControlClient]PTZControlClient.PTZControlConfig::get_Selected()" Advising="#1" Description="#4=Intercepted by advice OnGetValue" Semantic="Getter" Ordinal="0" />
+        <JoinPoint Advised="#5=M:[PTZControlClient]PTZControlClient.PTZControlConfig::set_Selected([PTZControlClient]PTZControlClient.PTZMode)" Advising="#1" Description="#6=Intercepted by advice OnSetValue" Semantic="Setter" />
+      </Target>
+    </Instance>
+    <Instance Declaration="#7=P:[PTZControlClient]PTZControlClient.PTZControlViewModel::PTZLimits()" Id="6176eb7cf1c2ec2e">
+      <Target>
+        <JoinPoint Advised="#8=M:[PTZControlClient]PTZControlClient.PTZControlViewModel::get_PTZLimits()" Advising="#1" Description="#4" Semantic="Getter" Ordinal="2" />
+        <JoinPoint Advised="#9=M:[PTZControlClient]PTZControlClient.PTZControlViewModel::set_PTZLimits(PTZControlService.PTZLimit)" Advising="#1" Description="#6" Semantic="Setter" Ordinal="3" />
+      </Target>
+    </Instance>
+    <Instance Declaration="#10=P:[PTZControlClient]PTZControlClient.PTZControlViewModel::PTZPosition()" Id="6176eb7cb16d4bc5">
+      <Target>
+        <JoinPoint Advised="#11=M:[PTZControlClient]PTZControlClient.PTZControlViewModel::get_PTZPosition()" Advising="#1" Description="#4" Semantic="Getter" Ordinal="4" />
+        <JoinPoint Advised="#12=M:[PTZControlClient]PTZControlClient.PTZControlViewModel::set_PTZPosition(PTZControlService.PTZ)" Advising="#1" Description="#6" Semantic="Setter" Ordinal="5" />
+      </Target>
+    </Instance>
+    <Instance Declaration="#13=P:[PTZControlClient]PTZControlClient.PTZControlViewModel::TargetTracker()" Id="6176eb7c26b847d4">
+      <Target>
+        <JoinPoint Advised="#14=M:[PTZControlClient]PTZControlClient.PTZControlViewModel::get_TargetTracker()" Advising="#1" Description="#4" Semantic="Getter" Ordinal="6" />
+        <JoinPoint Advised="#15=M:[PTZControlClient]PTZControlClient.PTZControlViewModel::set_TargetTracker([PTZControlClient]PTZControlClient.TestTargetTracker)" Advising="#1" Description="#6" Semantic="Setter" Ordinal="7" />
+      </Target>
+    </Instance>
+    <Instance Declaration="#16=P:[PTZControlClient]PTZControlClient.PTZControlViewModel::CamaraStaticInfo()" Id="6176eb7c9b151d68">
+      <Target>
+        <JoinPoint Advised="#17=M:[PTZControlClient]PTZControlClient.PTZControlViewModel::get_CamaraStaticInfo()" Advising="#1" Description="#4" Semantic="Getter" Ordinal="8" />
+        <JoinPoint Advised="#18=M:[PTZControlClient]PTZControlClient.PTZControlViewModel::set_CamaraStaticInfo(CCTVModels.CCTVStaticInfo)" Advising="#1" Description="#6" Semantic="Setter" Ordinal="9" />
+      </Target>
+    </Instance>
+    <Instance Declaration="#19=P:[PTZControlClient]PTZControlClient.PTZControlViewModel::Ship()" Id="6176eb7c272c8b0e">
+      <Target>
+        <JoinPoint Advised="#20=M:[PTZControlClient]PTZControlClient.PTZControlViewModel::get_Ship()" Advising="#1" Description="#4" Semantic="Getter" Ordinal="10" />
+        <JoinPoint Advised="#21=M:[PTZControlClient]PTZControlClient.PTZControlViewModel::set_Ship(PTZControlService.DynamicTarget)" Advising="#1" Description="#6" Semantic="Setter" Ordinal="11" />
+      </Target>
+    </Instance>
+    <Instance Declaration="#22=P:[PTZControlClient]PTZControlClient.TestTargetTracker::ExpPtz()" Id="6176eb7c0241c0f8">
+      <Target>
+        <JoinPoint Advised="#23=M:[PTZControlClient]PTZControlClient.TestTargetTracker::get_ExpPtz()" Advising="#1" Description="#4" Semantic="Getter" Ordinal="12" />
+        <JoinPoint Advised="#24=M:[PTZControlClient]PTZControlClient.TestTargetTracker::set_ExpPtz(PTZControlService.PTZ)" Advising="#1" Description="#6" Semantic="Setter" Ordinal="13" />
+      </Target>
+    </Instance>
+  </Class>
+</Symbols>

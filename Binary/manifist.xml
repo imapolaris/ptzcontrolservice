@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<PTZControlConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <PtzConfig>
+    <Type>DVR</Type>
+    <Ip>192.168.9.155</Ip>
+    <Port>8000</Port>
+    <UserName>admin</UserName>
+    <Password>admin12345</Password>
+    <Channel>1</Channel>
+    <CameraId>1</CameraId>
+    <SerialPort>1</SerialPort>
+    <SerialType>ICU03</SerialType>
+    <ReverseZoom>false</ReverseZoom>
+    <AuxSwitch />
+  </PtzConfig>
+  <TransPtzConfig>
+    <Type>TransDVR</Type>
+    <Ip>192.168.9.251</Ip>
+    <Port>8000</Port>
+    <UserName>admin</UserName>
+    <Password>admin12345</Password>
+    <Channel>0</Channel>
+    <CameraId>1</CameraId>
+    <SerialPort>1</SerialPort>
+    <SerialType>ICU03</SerialType>
+    <ReverseZoom>false</ReverseZoom>
+    <AuxSwitch />
+  </TransPtzConfig>
+  <TcpPtzConfig>
+    <Type>TCP</Type>
+    <Ip>192.168.9.56</Ip>
+    <Port>4001</Port>
+    <UserName>admin</UserName>
+    <Password>admin12345</Password>
+    <Channel>0</Channel>
+    <CameraId>1</CameraId>
+    <SerialPort>1</SerialPort>
+    <SerialType>Bewator</SerialType>
+    <ReverseZoom>false</ReverseZoom>
+    <AuxSwitch />
+  </TcpPtzConfig>
+  <WebConfig>
+    <Ip>127.0.0.1</Ip>
+    <Port>8888</Port>
+    <VideoId>CCTV1_50BAD15900010301</VideoId>
+  </WebConfig>
+  <Selected>串口服务器</Selected>
+</PTZControlConfig>

@@ -1,0 +1,39 @@
+﻿运行环境： .Net Framework 4.5
+
+配置参数说明：
+摄像机连接参数：
+	Ip:					摄像机Ip
+	Port:				摄像机端口
+	UserName;	用户名
+	Password:		密码
+	Channel:		视频通道号
+	CameraType:摄像机类型，支持固定和联动摄像机
+						固定摄像机参数为UnControl，
+						联动摄像机参数为DVR
+
+	SavePath:		快照保存路径；
+
+联动摄像机参数（仅联动摄像机生效）；
+	Longitude:摄像机经度
+	Latitude:摄像机纬度
+	Altitude:摄像机高度
+	FOV:摄像机起始角度°，转动摄像机为摄像机0°对应的实际方位角度；
+
+	RITS设置参数如下:
+	EventActiveMQUri:根据RITS进行修改
+	EventActiveMQTopic：默认为RITSV2.Event，无需修改
+
+	RuleType：
+					联动摄像机对应的参数为：Enter_Region
+					固定摄像机对应的参数为：Cross_Region
+
+DataBus设置参数（仅联动摄像机生效）：
+	DataBusEndpoint：	DataBus参数（仅联动摄像机生效）
+	DataBusTopic：		默认为ScUnion,一般不需修改（仅联动摄像机生效）
+
+联动摄像机抓拍参数（仅联动摄像机生效）：
+	DistanceMax：		最大抓拍距离，及目标距离摄像机最大距离， 防止过远目标抓拍；
+	DistanceMin：		最小抓拍距离，及目标距离摄像机最小距离， 防止错误目标抓拍；
+	DefaultLength：	默认船长度，当无法获知船长度信息时采用该值作为默认值进行联动抓拍；
+	TimeoutSeconds：抓拍超时时间（秒），即摄像机从转动到抓拍允许的最大耗时，超时后将放弃对该目标的专拍；
+								该参数主要为方式在抓拍中因其他操作控制云台导致转动位丢失的问题。

@@ -1,0 +1,309 @@
+﻿<!DOCTYPE html>
+
+<style type="text/css">
+    div#container div#header {
+        background-color: #99bbbb;
+    }
+
+    div#menu {
+        width: 200px;
+        float: left;
+    }
+
+    div#content {
+        width: 600px;
+        float: left;
+    }
+
+    div#menuR {
+        width: 400px;
+        float: left;
+    }
+
+    div#footer {
+        background-color: #99bbbb;
+        clear: both;
+        text-align: center;
+    }
+
+    h1 {
+        margin-bottom: 0;
+        color: red;
+    }
+
+    h2 {
+        margin-bottom: 0;
+        font-size: 18px;
+    }
+
+    ul {
+        margin: 0;
+    }
+
+    li {
+        list-style: none;
+    }
+
+    p {
+        color: green;
+    }
+
+    video {
+        text-align: center;
+    }
+
+    img {
+        text-align: center;
+    }
+
+    button {
+        width: 70px;
+        height: 30px;
+        margin-top: 2px;
+    }
+
+    input {
+        margin-top: 2px;
+    }
+    select{
+        height:25px;
+        color:blue;
+    }
+</style>
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>云镜控制-WebApi</title>
+    <meta charset="utf-8" />
+</head>
+<body>
+    <div id="content">
+        <h2>All Products</h2>
+        <ul id="products" />
+    </div>
+
+    <div id="menuR">
+        <p>
+            <h2>Control by VideoList</h2>
+            <table>
+                <tr>
+                    <td>云镜列表：</td>
+                    <td><select id="ptzlist"></select> </td>
+                </tr>
+                <tr>
+                    <td>操作:</td>
+                    <td><input type="text" id="action" size="3" value="0" /></td>
+                    <td><select id="actionlist"></select></td>
+                </tr>
+                <tr>
+                    <td>对应值:</td>
+                    <td><input type="text" id="index" size="3" value="0" /></td>
+                </tr>
+            </table>
+            <button onclick="control();">控制</button>
+            <button onclick="snapshot();" style="width:auto">快照(仅支持155)</button>
+            <lobal id="product"></lobal>
+        </p>
+        <p>
+            <div></div>
+            <button onmousedown="move(5);" onmouseup="stopPT();" style="width:30px;height:30px;text-align:center" >↖</button>
+            <button onmousedown="move(1);" onmouseup="stopPT();" style="width:30px;height:30px;text-align:center" >↑</button>
+            <button onmousedown="move(7);" onmouseup="stopPT();" style="width:30px;height:30px;text-align:center" >↗</button>
+            <br />
+            <button onmousedown="move(3);" onmouseup="stopPT();" style="width:30px;height:30px;text-align:center" >←</button>
+            <input type="text" id="speed" value="255" style="width:26px;height:26px;text-align:center;margin-top:0px;"/>
+            <button onmousedown="move(4);" onmouseup="stopPT();" style="width:30px;height:30px;text-align:center" >→</button>
+            <br />
+            <button onmousedown="move(6);" onmouseup="stopPT();" style="width:30px;height:30px;text-align:center" >↙</button>
+            <button onmousedown="move(2);" onmouseup="stopPT();" style="width:30px;height:30px;text-align:center" >↓</button>
+            <button onmousedown="move(8);" onmouseup="stopPT();" style="width:30px;height:30px;text-align:center" >↘</button>
+        </p>
+        <p>
+            <label>自动扫描:</label>
+            <button onclick="control2(9, 0);">开</button>
+            <button onclick="control2(9, 1);">关</button>
+        </p>
+        <p>
+            <table>
+                <tr>
+                    <th><label>变倍:</label></th>
+                    <th></th>
+                    <th>
+                        <button onmousedown="control2(13,0);" onmouseup="control2(12,0);">变大</button>
+                        <button onmousedown="control2(14,0);" onmouseup="control2(12,0);">变小</button>
+                    </th>
+                </tr>
+
+                <tr>
+                    <th><label>焦点:</label></th>
+                    <th></th>
+                    <th>
+                        <button onmousedown="control2(16,0);" onmouseup="control2(15,0);">前调</button>
+                        <button onmousedown="control2(17,0);" onmouseup="control2(15,0);">后调</button>
+                    </th>
+                </tr>
+
+                <tr>
+                    <th><label>光圈:</label></th>
+                    <th></th>
+                    <th>
+                        <button onmousedown="control2(19,0);" onmouseup="control2(18,0);">扩大</button>
+                        <button onmousedown="control2(20,0);" onmouseup="control2(18,0);">缩小</button>
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                        <label>辅助开关:</label>
+                    </th>
+                    <th>
+                        <input type="text" id="auxindex" size="1" value="" />
+                    </th>
+                    <th>
+                        <button onclick="control2(10, $('#auxindex').val());">开</button>
+                        <button onclick="control2(11, $('#auxindex').val());">关</button>
+                    </th>
+                </tr>
+                <tr>
+                    <th><label>预置位:</label></th>
+                    <th>
+                        <input type="text" id="ptrsetindex" size="1" value="1" />
+                    </th>
+                    <th>
+                        <button onclick="control2(80,$('#ptrsetindex').val());">设置</button>
+                        <button onclick="control2(81,$('#ptrsetindex').val());">转到</button>
+                        <button onclick="control2(82,$('#ptrsetindex').val());">清除</button>
+                    </th>
+                </tr>
+            </table>
+        </p>
+        <p>
+            <label>限位信息：</label>
+            <button onclick="loadptzlimits();">获取</button>
+            <lobel id="ptzlimits"></lobel>
+        </p>
+        <p>
+            <label>位置信息：</label>
+            <button onclick="loadptzposition();">获取</button>
+            <label id="ptzposition"></label>
+        </p>
+    </div>
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
+    <script>
+        var uri = 'api';
+
+    $(document).ready(function () {
+      // Send an AJAX request
+        $.getJSON(uri + '/GetCCTVStaticInfos')
+          .done(function (data) {
+            // On success, 'data' contains a list of products.
+            $.each(data, function (key, item) {
+              // Add a list item for the product.
+                $('<li>', { text: formatItem(item) }).appendTo($('#products'))
+                $('<li>', { data: item }).appendTo($('#products'));
+            });
+          });
+        $.getJSON(uri + '/GetCCTVStaticInfos')
+          .done(function (data) {
+              // On success, 'data' contains a list of products.
+              $.each(data, function (key, item) {
+                  // Add a list item for the product.
+                  $('<option value="' + item.VideoId + '">'+item.Name + '</option>').appendTo($('#ptzlist'));
+              });
+          });
+        $.getJSON(uri + '/getactions')
+          .done(function (data) {
+              // On success, 'data' contains a list of products.
+              $.each(data, function (key, item) {
+                  // Add a list item for the product.
+                  $('<option value="' + item.Index + '">' + item.Action + '</option>').appendTo($('#actionlist'));
+              });
+          });
+    });
+
+    function formatItem(item) {
+        var base = '视频名称: ' + item.Name + '  视频Id: ' + item.VideoId;// + '  云镜控制类型：' + item.PTZType +'  Ip:' + item.PtzControlConfig.Ip + '  Port:' + item.PtzControlConfig.Port;
+        //if (item.PTZType == 1)
+        //    return base + ' 用户名：'+item.PtzControlConfig.UserName + '   密码：' + item.PtzControlConfig.Password + '  通道号: ' + item.PtzControlConfig.Channel;
+        //if (item.PTZType == 2)
+        //    return base + ' 用户名：' + item.PtzControlConfig.UserName + '   密码：' + item.PtzControlConfig.Password + '  通道号: ' + item.PtzControlConfig.Channel + '   摄像机地址:' + item.PtzControlConfig.CamId + '   反转变倍：' + item.PtzControlConfig.ReverseZoom;
+        //else if (item.PTZType == 3)
+        //    return base + '   摄像机地址:' + item.PtzControlConfig.CamId + '   反转变倍：' + item.PtzControlConfig.ReverseZoom;
+        return base;
+    }
+
+    function formatbackItem(item) {
+        return item;
+    }
+
+    function control() {
+        var action = document.getElementById("actionlist").value;
+        control1(action);
+    }
+
+    function control1(action) {
+        var index = $('#index').val();
+        control2(action, index);
+    }
+
+    function control2(action,index) {
+        var id = document.getElementById("ptzlist").value;
+        control3(id, action, index);
+    }
+
+    function control3(videoid, action, index) {
+        $.getJSON(uri + '/ptzcontrol/control?videoid=' + videoid + '&action=' + action + '&data=' + index)
+          .done(function (data) {
+              $('#product').text(formatbackItem(data));
+          })
+          .fail(function (jqXHR, textStatus, err) {
+              $('#product').text('Error: ' + err);
+          });
+    }
+
+    function stopPT() {
+        control2(0, 0);
+    }
+    function move(action)
+    {
+        var speed = $('#speed').val();
+        control2(action, speed);
+    }
+    function snapshot()
+    {
+        var id = document.getElementById("ptzlist").value;
+        $.getJSON(uri + '/snapshot/' + id)
+         .done(function (data) {
+             $('#product').text(formatbackItem(data));
+         })
+         .fail(function (jqXHR, textStatus, err) {
+             $('#product').text('Error: ' + err);
+         });
+    }
+
+    function loadptzlimits()
+    {
+        var id = document.getElementById("ptzlist").value;
+        $.getJSON(uri + '/ptzlimits/' + id)
+         .done(function (data) {
+             $('#ptzlimits').text('左：' +data.Left + '，右'+ data.Right + '，上'+data.Up+'，下'+data.Down+'，最大变倍：'+data.ZoomMax);
+         })
+         .fail(function (jqXHR, textStatus, err) {
+             $('#ptzlimits').text('获取云镜限位信息失败！ ' + err);
+         });
+    }
+
+
+    function loadptzposition() {
+        var id = document.getElementById("ptzlist").value;
+        $.getJSON(uri + '/ptz/' + id)
+         .done(function (data) {
+             $('#ptzposition').text('Pan：' + data.Pan + '，Tilt' + data.Tilt + '，Zoom' + data.Zoom);
+         })
+         .fail(function (jqXHR, textStatus, err) {
+             $('#ptzposition').text('获取云镜位置信息失败！ ' + err);
+         });
+    }
+    </script>
+</body>
+</html>

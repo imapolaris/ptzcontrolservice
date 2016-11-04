@@ -1,0 +1,176 @@
+﻿<Window x:Class="BewatorPTZTest.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BewatorPTZTest"
+        xmlns:helper="clr-namespace:BewatorPTZTest.Helper"
+        xmlns:scbwt="clr-namespace:BewatorPTZTest.ScBewator"
+        mc:Ignorable="d"
+        Title="比沃特RTX15D云台测试" Height="700" Width="800">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Dictionary/DictStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="400"/>
+            <ColumnDefinition Width="2"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <DockPanel Background="#0444C4" Grid.ColumnSpan="3">
+            <DockPanel DockPanel.Dock="Left" Width="180">
+            <StackPanel DataContext="{Binding PtzConfig}" 
+                    Orientation="Vertical"
+                        DockPanel.Dock="Top">
+                <DockPanel>
+                    <Label Content="IP:"/>
+                    <TextBox Text="{Binding Ip}"/>
+                </DockPanel>
+                <DockPanel>
+                    <Label Content="端口:"/>
+                    <TextBox Text="{Binding Port}"/>
+                </DockPanel>
+                <DockPanel>
+                    <Label Content="地址:"/>
+                    <TextBox Text="{Binding CameraId}"/>
+                </DockPanel>
+                <!--<DockPanel>
+                    <Label Content="反转Z:"/>
+                    <TextBox Text="{Binding ReverseZoom}"/>
+                </DockPanel>-->
+            </StackPanel>
+            <Separator/>
+            <StackPanel HorizontalAlignment="Center">
+                <Button Content="连接"
+                        Command="{Binding ConnectCommand}"/>
+                <Button Content="断开" 
+                        Command="{Binding DisconnectCommand}"/>
+            </StackPanel>
+            </DockPanel>
+            <Grid DockPanel.Dock="Left">
+                <Button Content="↖" Style="{StaticResource SquareButton}" Margin="-80,-60,0,0"
+                        helper:MouseCommandBehavior.MouseDownCommand="{Binding LeftUpCommand}"
+                        helper:MouseCommandBehavior.MouseUpCommand="{Binding StopMoveCommand}"/>
+                <Button Content="↑" Style="{StaticResource SquareButton}" Margin="0,-60,0,0"
+                        helper:MouseCommandBehavior.MouseDownCommand="{Binding UpCommand}"
+                        helper:MouseCommandBehavior.MouseUpCommand="{Binding StopMoveCommand}"/>
+                <Button Content="↗" Style="{StaticResource SquareButton}" Margin="80,-60,0,0"
+                        helper:MouseCommandBehavior.MouseDownCommand="{Binding RightUpCommand}"
+                        helper:MouseCommandBehavior.MouseUpCommand="{Binding StopMoveCommand}"/>
+                <Button Content="←" Style="{StaticResource SquareButton}" Margin="-80,0,0,0"
+                        helper:MouseCommandBehavior.MouseDownCommand="{Binding LeftCommand}"
+                        helper:MouseCommandBehavior.MouseUpCommand="{Binding StopMoveCommand}"/>
+                <TextBox Text="{Binding Speed}"  
+                         Width="40" 
+                         Height="30"
+                         TextAlignment="Center"/>
+                <Button Content="→" Style="{StaticResource SquareButton}" Margin="80,0,0,0"
+                        helper:MouseCommandBehavior.MouseDownCommand="{Binding RightCommand}"
+                        helper:MouseCommandBehavior.MouseUpCommand="{Binding StopMoveCommand}"/>
+                <Button Content="↙" Style="{StaticResource SquareButton}" Margin="-80,60,0,0"
+                        helper:MouseCommandBehavior.MouseDownCommand="{Binding LeftDownCommand}"
+                        helper:MouseCommandBehavior.MouseUpCommand="{Binding StopMoveCommand}"/>
+                <Button Content="↓" Style="{StaticResource SquareButton}" Margin="0,60,0,0"
+                        helper:MouseCommandBehavior.MouseDownCommand="{Binding DownCommand}"
+                        helper:MouseCommandBehavior.MouseUpCommand="{Binding StopMoveCommand}"/>
+                <Button Content="↘" Style="{StaticResource SquareButton}" Margin="80,60,0,0"
+                        helper:MouseCommandBehavior.MouseDownCommand="{Binding RightDownCommand}"
+                        helper:MouseCommandBehavior.MouseUpCommand="{Binding StopMoveCommand}"/>
+            </Grid>
+            <StackPanel Orientation="Vertical"
+                        DockPanel.Dock="Left"
+                        VerticalAlignment="Center">
+                <StackPanel>
+                    <Label Content="变倍:" Margin="2,1"/>
+                    <Button Content="变大" Margin="2,1"
+                        helper:MouseCommandBehavior.MouseDownCommand="{Binding ZoomInCommand}"
+                        helper:MouseCommandBehavior.MouseUpCommand="{Binding StopZoomCommand}"/>
+                    <Button Content="变小" 
+                        helper:MouseCommandBehavior.MouseDownCommand="{Binding ZoomOutCommand}"
+                        helper:MouseCommandBehavior.MouseUpCommand="{Binding StopZoomCommand}"/>
+                </StackPanel>
+                <StackPanel>
+                    <Label Content="焦点:" Margin="2,1"/>
+                    <Button Content="前调"
+                        helper:MouseCommandBehavior.MouseDownCommand="{Binding FocusNearRCommand}"
+                        helper:MouseCommandBehavior.MouseUpCommand="{Binding StopFocusCommand}"/>
+                    <Button Content="后调"
+                        helper:MouseCommandBehavior.MouseDownCommand="{Binding FocusFarCommand}"
+                        helper:MouseCommandBehavior.MouseUpCommand="{Binding StopFocusCommand}"/>
+                </StackPanel>
+                <StackPanel>
+                    <Label Content="光圈:" Margin="2,1"/>
+                    <Button Content="扩大"
+                        helper:MouseCommandBehavior.MouseDownCommand="{Binding IrisOpenCommand}"
+                        helper:MouseCommandBehavior.MouseUpCommand="{Binding StopIrisCommand}"/>
+                    <Button Content="缩小"
+                        helper:MouseCommandBehavior.MouseDownCommand="{Binding IrisCloseCommand}"
+                        helper:MouseCommandBehavior.MouseUpCommand="{Binding StopIrisCommand}"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Margin="0,10">
+                <StackPanel>
+                    <Label Content="辅助开关:" Width="60"/>
+                    <TextBox Text="{Binding AuxIndex}" Width="50"/>
+                    <Button Content="开" Command="{Binding AuxOnCommand}"/>
+                    <Button Content="关" Command="{Binding AuxOffCommand}"/>
+                    <Button Content="自检" Command="{Binding Serial.Serial.SelfScanCmd}"/>
+                </StackPanel>
+                    <StackPanel>
+                        <Label Content="预置位:" Width="60"/>
+                        <TextBox Text="{Binding PresetIndex}" Width="50"/>
+                    <Button Content="清除" Command="{Binding ClearPresetCommand}"/>
+                    <Button Content="设置" Command="{Binding SetPresetCommand}"/>
+                            <Button Content="转到" Command="{Binding GoToPresetCommand}"/>
+                    </StackPanel>
+                    <StackPanel>
+                        <Label Content="指令控制:" Width="60"/>
+                        <TextBox Text="{Binding SendString}" Width="178"/>
+                        <Button Content="发送" Command="{Binding SendCommand}" Width="60" DockPanel.Dock="Right"/>
+                    </StackPanel>
+            </StackPanel>
+        </DockPanel>
+        <DockPanel Background="#1050ea" 
+                    Grid.Row ="1">
+            <StackPanel DockPanel.Dock="Bottom" HorizontalAlignment="Center">
+                <Button Content="清空提示" Command="{Binding ClearPromptCmd}"/>
+                <CheckBox Content="继续/暂停接收提示"
+                          IsChecked="{Binding IsAddRecrivePromptCmd}"
+                          Foreground="White"
+                          VerticalAlignment="Center"/>
+            </StackPanel>
+            <TabControl Background="Transparent">
+                <TabItem Header="全部">
+                    <TextBox Text="{Binding AllPrompt}"
+                             Style="{StaticResource ShowTextBox}"/>
+                </TabItem>
+                <TabItem Header="发送">
+                    <TextBox Text="{Binding SendPrompt}" 
+                             Style="{StaticResource ShowTextBox}"/>
+                </TabItem>
+                <TabItem Header="接收">
+                    <TextBox  Text="{Binding ReceivedPrompt}"
+                              Style="{StaticResource ShowTextBox}"/>
+                </TabItem>
+                <TabItem Header="状态">
+                    <TextBox  Text="{Binding StatusPrompt}"
+                              Style="{StaticResource ShowTextBox}"/>
+                </TabItem>
+            </TabControl>
+        </DockPanel>
+        <GridSplitter Grid.Column="1"
+                   Grid.Row="1"
+                   Background="#2020F0"/>
+        <scbwt:Rtx15dControl DataContext="{Binding Serial.Serial}"
+                             Grid.Column="2"
+                    Grid.Row="1"/>
+    </Grid>
+</Window>

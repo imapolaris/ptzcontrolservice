@@ -1,0 +1,7 @@
+2016-08-01 17:44:33.5520 | Error | 保存异常：manifist.xml
+对路径“c:\windows\system32\inetsrv\manifist.xml”的访问被拒绝。 
+2016-08-01 17:45:13.0162 | Error | tcp connect Server error! 
+2016-08-01 17:52:56.4242 | Error | 保存异常：manifist.xml
+对路径“C:\Program Files (x86)\IIS Express\manifist.xml”的访问被拒绝。 
+2016-08-01 18:37:22.8381 | Error | 保存异常：manifist.xml
+对路径“C:\Program Files (x86)\IIS Express\manifist.xml”的访问被拒绝。 
